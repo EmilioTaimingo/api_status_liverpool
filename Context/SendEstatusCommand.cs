@@ -24,7 +24,7 @@ namespace api_status_liverpool.Context
             //pasamos los parametros que vamos a imprimir 
             DataGuide oPost = new DataGuide
             {
-                thirdPl = "036",
+                thirdPl = "048",
                 tn_reference = IdentifierGuide,
                 estimated_delivery_date = DateTime.Now.AddHours(5).ToString(),
                 tracking_number = Guia,
