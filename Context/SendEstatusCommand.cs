@@ -12,7 +12,7 @@ namespace api_status_liverpool.Context
     {
         public ReplyLiverpool Cambia_Status(string Guia, string IdentifierGuide,string statusCode, string comentario)
         {
-            string url = "https://qatapigee.liverpool.com.mx/liverpool/4pl/marketplaceExt/estatus";
+            string url = "https://apigee-pro.liverpool.com.mx/liverpool/4pl/marketplaceExt/estatus\r\n";
             guiaImg guiaImg = new guiaImg
             {
                 guiaFirmaB64 = "",
@@ -44,7 +44,7 @@ namespace api_status_liverpool.Context
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("apikey", "DYqhtbG4pWfGR6Icf77ZuO3VdZVWJjcpsXRyuv7NXre05dDA");
+                client.DefaultRequestHeaders.Add("apikey", "XKQxINLolY1vTqyAoVzPDHzRENq6eQNcaNCON4sABBNzalA6");
                 var httpResponse = client.PostAsync(url, content).Result;
                 var res = httpResponse.Content.ReadAsStringAsync().Result;
                 return JsonSerializer.Deserialize<ReplyLiverpool>(res);
