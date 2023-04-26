@@ -212,10 +212,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Context\DBContext.cs" />
+    <Compile Include="Context\GuiasCommands.cs" />
     <Compile Include="Context\SendEstatusCommand.cs" />
     <Compile Include="Context\ValidaGuia.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Update_Status_Guide_LiverpoolController.cs" />
+    <Compile Include="Controllers\Update_Status_Guide_ExternasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -225,8 +226,10 @@
     <Compile Include="Models\DataGuide.cs" />
     <Compile Include="Models\DataGuideComment.cs" />
     <Compile Include="Models\guiaImg.cs" />
+    <Compile Include="Models\Guias.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\ReplyLiverpool.cs" />
+    <Compile Include="Models\ShopifyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
