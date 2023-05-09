@@ -69,8 +69,8 @@ namespace api_status_liverpool.Context
                 while (leer.Read())
                 {
                     shopify.ShopifyID = leer.GetInt32("sho_id");
-                    shopify.Key = leer["sho_appkey"].ToString();
-                    shopify.Token = leer["sho_token"].ToString();
+                    shopify.Key = leer["sap_apikey"].ToString();
+                    shopify.Token = leer["sho_key"].ToString();
                     shopify.ShopifyID = leer.GetInt32("sho_id");
                     shopify.FechaAlta = leer["sho_fechaalta"].ToString();
                     shopify.Tienda = leer["sho_tienda"].ToString();
