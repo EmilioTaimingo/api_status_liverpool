@@ -1,4 +1,4 @@
-﻿using api_status_liverpool.Models;
+using api_status_liverpool.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +44,7 @@ namespace api_status_liverpool.Context
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("apikey", "XKQxINLolY1vTqyAoVzPDHzRENq6eQNcaNCON4sABBNzalA6");
+                client.DefaultRequestHeaders.Add("apikey", "m1czD4yuaJKjdpBNe1Ad6j4Rv1g1ZyoXAK2wVemtLXSoFeH2");
                 var httpResponse = client.PostAsync(url, content).Result;
                 var res = httpResponse.Content.ReadAsStringAsync().Result;
                 return JsonSerializer.Deserialize<ReplyLiverpool>(res);
