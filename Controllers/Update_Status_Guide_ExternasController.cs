@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using System.Net.Http.Headers;
 
 namespace api_status_liverpool.Controllers
 {
@@ -69,6 +70,36 @@ namespace api_status_liverpool.Controllers
                     }
 
                 }
+            } else if (datos.Tipo_Guia == 6)
+            {
+                var handler = new HttpClientHandler();
+                var fecha1 = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss");
+                var fecha2 = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+                using (var httpClient = new HttpClient(handler))
+                {
+                    using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://qatapigee.liverpool.com.mx/liverpool/4pl/api/estatus"))
+                    {
+                        request.Headers.TryAddWithoutValidation("Apikey", "LR64D0SXLgNGPfDQIxMfu1GLG2ZXBln9diPUhEZOQGW21l0S");
+
+                        request.Content = new StringContent("{\n\"thirdPL\": \"ACP\",\n\"tn_reference\" : \""+ datos.Identificador + "\",\n\"estimated_delivery_date\" :\""+ fecha1 + "\",\n\"tracking_number\": \""+ odatos.Guide + "\",\n\"code\": \""+ odatos.Status_Code + "\",\n\"commen\": \"Ok\",\n\"date\": \""+ fecha2 + "\"\n}");
+                        request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+
+                        var response = httpClient.SendAsync(request).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            respuesta.type_Reply_Liverpool = "Liverpool AccessPack";
+                            respuesta.Message = "OK";
+                            respuesta.Result = 200;
+                        }
+                        else
+                        {
+                            respuesta.type_Reply_Liverpool = "Liverpool AccessPack";
+                            respuesta.Message = "Error de alta de estatus";
+                            respuesta.Result = 404;
+                        }
+                    }
+                }
+
             }
             else if (datos.Cliente_Id == 0)
             {
