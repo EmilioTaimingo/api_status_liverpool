@@ -1,4 +1,4 @@
-﻿using api_status_liverpool.Context;
+using api_status_liverpool.Context;
 using api_status_liverpool.Models;
 using MySqlX.XDevAPI.Common;
 using System;
@@ -77,9 +77,9 @@ namespace api_status_liverpool.Controllers
                 var fecha2 = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
                 using (var httpClient = new HttpClient(handler))
                 {
-                    using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://qatapigee.liverpool.com.mx/liverpool/4pl/api/estatus"))
+                    using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://apigee-pro.liverpool.com.mx/liverpool/4pl/api/estatus"))
                     {
-                        request.Headers.TryAddWithoutValidation("Apikey", "LR64D0SXLgNGPfDQIxMfu1GLG2ZXBln9diPUhEZOQGW21l0S");
+                        request.Headers.TryAddWithoutValidation("Apikey", "kFGGSVW3R8jO9h7HjbFaR2kX7JFB5A9URRFpoNESBNXh2Es2");
 
                         request.Content = new StringContent("{\n\"thirdPL\": \"ACP\",\n\"tn_reference\" : \""+ datos.Identificador + "\",\n\"estimated_delivery_date\" :\""+ fecha1 + "\",\n\"tracking_number\": \""+ odatos.Guide + "\",\n\"code\": \""+ odatos.Status_Code + "\",\n\"commen\": \"Ok\",\n\"date\": \""+ fecha2 + "\"\n}");
                         request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
