@@ -12,6 +12,10 @@ using System.Net.Http.Headers;
 
 namespace api_status_liverpool.Controllers
 {
+    //TIPOS DE GUIAS
+    //2 PERTENECE A FANTASY INTERLAIN DE MIRAKL
+    //3 SE REFIERE AL CONSUMO DE SHOPIFY PARA AGREGAR LA GUIA CUANDO ESTA YA FUE ENTREGADA
+    //6 SE REFIERE A LIVERPOOL DEL PROYECTO ACCESS PACK Y CONSUME LOS MISMOS ESTATUS QUE FANTASY
     public class Update_Status_Guide_ExternasController: ApiController
     {
         public Reply Post([FromBody]DataGuideComment odatos)//valida las credenciales de acceso(usuario,contraseña)
