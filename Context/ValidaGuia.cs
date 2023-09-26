@@ -13,6 +13,7 @@ namespace api_status_liverpool.Context
     {
         public CamposGuiaTaimingo Valida_Guia(string Guia)//Llamado los detalles de la atrea
         {
+            string guia = Guia.Replace(" ", String.Empty);
             CamposGuiaTaimingo oDatosGuia=new CamposGuiaTaimingo();
             string connectionString = $"server ={GetRDSConections().Writer}; {Data_base}";
 
@@ -22,7 +23,7 @@ namespace api_status_liverpool.Context
                 MySqlCommand cmd = new MySqlCommand("get_cliente_from_guia_sp", conexion);
 
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("paqguia",Guia);
+                cmd.Parameters.AddWithValue("paqguia",guia);
 
                 try
                 {

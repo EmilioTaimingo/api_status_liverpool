@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using System.Net.Http.Headers;
+using Org.BouncyCastle.Utilities;
 
 namespace api_status_liverpool.Controllers
 {
@@ -26,6 +27,8 @@ namespace api_status_liverpool.Controllers
             ShopifyModel _shopifyModel = new ShopifyModel();
             Guias _guias = new Guias();
             GuiasCommands _guiasCommands = new GuiasCommands();
+              
+                
             var datos = oValidaTipoGuia.Valida_Guia(odatos.Guide);
             if (datos.Tipo_Guia == 2)
             {
@@ -76,6 +79,15 @@ namespace api_status_liverpool.Controllers
                 }
             } else if (datos.Tipo_Guia == 6)
             {
+
+
+                string str = datos.Identificador;
+                
+
+                string[] tokens = str.Split('-');
+                string prueba =tokens[0];
+
+              string guia  = tokens[0].Replace(" ", String.Empty);
                 var handler = new HttpClientHandler();
                 var fecha1 = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss");
                 var fecha2 = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
@@ -83,11 +95,10 @@ namespace api_status_liverpool.Controllers
                 {
                     using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://apigee-pro.liverpool.com.mx/liverpool/4pl/api/estatus"))
                     {
-                        request.Headers.TryAddWithoutValidation("Apikey", "kFGGSVW3R8jO9h7HjbFaR2kX7JFB5A9URRFpoNESBNXh2Es2");
-
-                        request.Content = new StringContent("{\n\"thirdPL\": \"ACP\",\n\"tn_reference\" : \""+ datos.Identificador + "\",\n\"estimated_delivery_date\" :\""+ fecha1 + "\",\n\"tracking_number\": \""+ odatos.Guide + "\",\n\"code\": \""+ odatos.Status_Code + "\",\n\"commen\": \"Ok\",\n\"date\": \""+ fecha2 + "\"\n}");
+                        request.Headers.TryAddWithoutValidation("Apikey","kFGGSVW3R8jO9h7HjbFaR2kX7JFB5A9URRFpoNESBNXh2Es2");
+                        request.Content = new StringContent("{\n\"thirdPL\":\"ACP\",\n\"tn_reference\":\""+tokens[0]+"\",\n\"estimated_delivery_date\":\""+fecha1+"\",\n\"tracking_number\":\""+odatos.Guide+"\",\n\"code\":\""+odatos.Status_Code+"\",\n\"commen\":\"Ok\",\n\"date\":\""+fecha2+"\"\n}");
                         request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-
+                         
                         var response = httpClient.SendAsync(request).Result;
                         if (response.IsSuccessStatusCode)
                         {
