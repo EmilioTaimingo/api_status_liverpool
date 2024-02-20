@@ -10,9 +10,11 @@ using System.Web;
 using System.Web.Http;
 using System.Net.Http.Headers;
 using Org.BouncyCastle.Utilities;
+using Newtonsoft.Json.Linq;
 
 namespace api_status_liverpool.Controllers
 {
+    
     //TIPOS DE GUIAS
     //2 PERTENECE A FANTASY INTERLAIN DE MIRAKL
     //3 SE REFIERE AL CONSUMO DE SHOPIFY PARA AGREGAR LA GUIA CUANDO ESTA YA FUE ENTREGADA
@@ -21,6 +23,7 @@ namespace api_status_liverpool.Controllers
     {
         public Reply Post([FromBody]DataGuideComment odatos)//valida las credenciales de acceso(usuario,contraseña)
         {  
+          Logs ObjLog = new Logs();
             var respuesta=new Reply();
             ValidaGuia oValidaTipoGuia=new ValidaGuia();
             SendEstatusCommand oStatus=new SendEstatusCommand();
@@ -100,7 +103,12 @@ namespace api_status_liverpool.Controllers
                         request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
                          
                         var response = httpClient.SendAsync(request).Result;
-                        if (response.IsSuccessStatusCode)
+                        var res = response.Content.ReadAsStringAsync().Result;
+
+                        JObject respuestaObjeto = JObject.Parse(res);
+                        ObjLog.Alta_logs(0, res, "api_status_liverpool-"+ odatos.Status_Code);
+                    
+                    if (response.IsSuccessStatusCode)
                         {
                             respuesta.type_Reply_Liverpool = "Liverpool AccessPack";
                             respuesta.Message = "OK";

@@ -213,6 +213,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Context\DBContext.cs" />
     <Compile Include="Context\GuiasCommands.cs" />
+    <Compile Include="Context\Logs.cs" />
     <Compile Include="Context\SendEstatusCommand.cs" />
     <Compile Include="Context\ValidaGuia.cs" />
     <Compile Include="Controllers\HomeController.cs" />
