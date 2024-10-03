@@ -106,7 +106,7 @@ namespace api_status_liverpool.Controllers
                         var res = response.Content.ReadAsStringAsync().Result;
 
                         JObject respuestaObjeto = JObject.Parse(res);
-                        ObjLog.Alta_logs(0, res, "api_status_liverpool-"+ odatos.Status_Code);
+                        ObjLog.Alta_logs(0, res, "api_status_liverpool"+ odatos.Status_Code,0,guia);
                     
                     if (response.IsSuccessStatusCode)
                         {

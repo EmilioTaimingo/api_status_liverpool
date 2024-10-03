@@ -9,7 +9,7 @@ namespace api_status_liverpool.Context
     public class Logs: DBContext
 
     {
-        public void Alta_logs(int id, string error, string aplicacion)
+        public void Alta_logs(int id, string error, string aplicacion,int usuid ,string guia)
         {
 
             DateTime fecha = DateTime.Now;
@@ -31,7 +31,8 @@ namespace api_status_liverpool.Context
                 cmd.Parameters.AddWithValue("logfecha", fecha);
                 cmd.Parameters.AddWithValue("logerror", error);
                 cmd.Parameters.AddWithValue("logaplicacion", aplicacion);
-                cmd.Parameters.AddWithValue("usuid", null);
+                cmd.Parameters.AddWithValue("usuid", usuid);
+                cmd.Parameters.AddWithValue("logguia", guia);
 
                 cnn.Open();
                 int res = cmd.ExecuteNonQuery();
